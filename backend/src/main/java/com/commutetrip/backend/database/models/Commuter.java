@@ -24,11 +24,11 @@ public class Commuter {
   @Column(name = "commuter_name")
   private String commuterName;
 
-  @Column(name = "route_id")
-  private Long routeId;
+  @Column(name = "aws_user_id")
+  private Long awsUserId;
 
-  public Commuter(String commuterName, Long routeId) {
+  public Commuter(String commuterName, Long awsUserId) {
     this.commuterName = commuterName;
-    this.routeId = routeId;
+    this.awsUserId = awsUserId;
   }
 }

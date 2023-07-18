@@ -24,12 +24,8 @@ public class TrainingTruck {
   @Column(name = "route_id")
   private Long routeId;
 
-  @Column(name = "fitness_level_id")
-  private Long fitnessLevelId;
-
-  public TrainingTruck(Long routeId, Long fitnessLevelId) {
+  public TrainingTruck(Long routeId) {
     this.routeId = routeId;
-    this.fitnessLevelId = fitnessLevelId;
   }
 
 }
