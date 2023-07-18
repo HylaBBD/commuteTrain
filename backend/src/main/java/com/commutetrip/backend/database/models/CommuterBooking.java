@@ -14,17 +14,21 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "fitness_levels")
-public class FitnessLevel {
+@Table(name = "commuter_bookings")
+public class CommuterBooking {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "fitness_level_id")
-  private Long fitnessLevelId;
+  @Column(name = "booking_id")
+  private Long bookingId;
 
-  @Column(name = "description")
-  private String fitnessDescription;
+  @Column(name = "commuter_id")
+  private Long commuterId;
 
-  public FitnessLevel(String fitnessDescription) {
-    this.fitnessDescription = fitnessDescription;
+  @Column(name = "truck_route_id")
+  private Long truckRouteId;
+
+  public CommuterBooking(Long commuterId, Long truckRouteId) {
+    this.commuterId = commuterId;
+    this.truckRouteId = truckRouteId;
   }
 }
