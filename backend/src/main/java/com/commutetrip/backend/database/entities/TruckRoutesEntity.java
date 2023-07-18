@@ -1,4 +1,4 @@
-package com.commutetrip.backend.database.models;
+package com.commutetrip.backend.database.entities;
 
 import java.sql.Timestamp;
 
@@ -17,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "truck_routes")
-public class TruckRoutes {
+public class TruckRoutesEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "truck_route_id")
@@ -32,7 +32,7 @@ public class TruckRoutes {
   @Column(name = "drop_off_time")
   private Timestamp dropOffTime;
 
-  public TruckRoutes(Long routeId, Timestamp pickupTime, Timestamp dropOffTime) {
+  public TruckRoutesEntity(Long routeId, Timestamp pickupTime, Timestamp dropOffTime) {
     this.routeId = routeId;
     this.pickupTime = pickupTime;
     this.dropOffTime = dropOffTime;
