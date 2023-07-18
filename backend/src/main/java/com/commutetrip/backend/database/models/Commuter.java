@@ -1,4 +1,4 @@
-package com.commutetrip.backend.models;
+package com.commutetrip.backend.database.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,23 +12,23 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
-@Table(name = "commuter_routes")
-public class CommuterRoute {
+@NoArgsConstructor
+@Table(name = "commuters")
+public class Commuter {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "commuter_route_id")
-  private Long commuterRouteId;
-
   @Column(name = "commuter_id")
   private Long commuterId;
+
+  @Column(name = "commuter_name")
+  private String commuterName;
 
   @Column(name = "route_id")
   private Long routeId;
 
-  public CommuterRoute(Long commuterId, Long routeId) {
-    this.commuterId = commuterId;
+  public Commuter(String commuterName, Long routeId) {
+    this.commuterName = commuterName;
     this.routeId = routeId;
   }
 }

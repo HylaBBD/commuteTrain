@@ -1,4 +1,4 @@
-package com.commutetrip.backend.models;
+package com.commutetrip.backend.database.models;
 
 import java.sql.Timestamp;
 
