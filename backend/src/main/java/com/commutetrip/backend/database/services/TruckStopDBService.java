@@ -10,11 +10,11 @@ import com.commutetrip.backend.database.repositories.TruckStopRepository;
 import com.commutetrip.backend.database.entities.TruckStopEntity;
 
 @Service
-public class TruckStopService {
+public class TruckStopDBService {
     private TruckStopRepository repository;
 
     @Autowired
-    public TruckStopService(TruckStopRepository repository) {
+    public TruckStopDBService(TruckStopRepository repository) {
         this.repository = repository;
     }
 

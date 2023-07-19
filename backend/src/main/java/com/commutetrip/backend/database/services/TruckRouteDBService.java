@@ -11,11 +11,11 @@ import com.commutetrip.backend.database.repositories.TruckRouteRepository;
 import com.commutetrip.backend.database.entities.TruckRouteEntity;
 
 @Service
-public class TruckRouteService {
+public class TruckRouteDBService {
     private TruckRouteRepository repository;
 
     @Autowired
-    public TruckRouteService(TruckRouteRepository repository) {
+    public TruckRouteDBService(TruckRouteRepository repository) {
         this.repository = repository;
     }
 
