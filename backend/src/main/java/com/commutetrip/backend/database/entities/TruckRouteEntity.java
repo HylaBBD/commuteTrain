@@ -17,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "truck_routes")
-public class TruckRoutesEntity {
+public class TruckRouteEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "truck_route_id")
@@ -32,7 +32,7 @@ public class TruckRoutesEntity {
   @Column(name = "drop_off_time")
   private Timestamp dropOffTime;
 
-  public TruckRoutesEntity(Long routeId, Timestamp pickupTime, Timestamp dropOffTime) {
+  public TruckRouteEntity(Long routeId, Timestamp pickupTime, Timestamp dropOffTime) {
     this.routeId = routeId;
     this.pickupTime = pickupTime;
     this.dropOffTime = dropOffTime;
