@@ -1,4 +1,4 @@
-package com.commutetrip.backend.database.models;
+package com.commutetrip.backend.database.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +15,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @Table(name = "commuters")
-public class Commuter {
+public class CommuterEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "commuter_id")
@@ -27,7 +27,7 @@ public class Commuter {
   @Column(name = "aws_user_id")
   private Long awsUserId;
 
-  public Commuter(String commuterName, Long awsUserId) {
+  public CommuterEntity(String commuterName, Long awsUserId) {
     this.commuterName = commuterName;
     this.awsUserId = awsUserId;
   }
