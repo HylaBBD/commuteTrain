@@ -10,11 +10,11 @@ import com.commutetrip.backend.database.repositories.CommuterBookingRepository;
 import com.commutetrip.backend.database.entities.CommuterBookingEntity;
 
 @Service
-public class CommuterBookingService {
+public class CommuterBookingDBService {
     private CommuterBookingRepository repository;
 
     @Autowired
-    public CommuterBookingService(CommuterBookingRepository commuterBookingRepository) {
+    public CommuterBookingDBService(CommuterBookingRepository commuterBookingRepository) {
         this.repository = commuterBookingRepository;
     }
 

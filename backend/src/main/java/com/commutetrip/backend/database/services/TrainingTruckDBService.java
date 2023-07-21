@@ -10,11 +10,11 @@ import com.commutetrip.backend.database.repositories.TrainingTruckRepository;
 import com.commutetrip.backend.database.entities.TrainingTruckEntity;
 
 @Service
-public class TrainingTruckService {
+public class TrainingTruckDBService {
     private TrainingTruckRepository repository;
 
     @Autowired
-    public TrainingTruckService(TrainingTruckRepository repository) {
+    public TrainingTruckDBService(TrainingTruckRepository repository) {
         this.repository = repository;
     }
 
