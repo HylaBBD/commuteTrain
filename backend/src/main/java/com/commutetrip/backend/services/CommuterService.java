@@ -8,17 +8,13 @@ import java.util.stream.Collectors;
 import com.commutetrip.backend.database.services.CommuterDBService;
 import com.commutetrip.backend.database.entities.CommuterEntity;
 import com.commutetrip.backend.models.Commuter;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class CommuterService {
     private final CommuterDBService service;
-
-    @Autowired
-    public CommuterService(CommuterDBService service) {
-        this.service = service;
-    }
 
     private Optional<Commuter> mapEntityToModel(Optional<CommuterEntity> commuterEntity) {
         return commuterEntity.map(entity -> new Commuter(
