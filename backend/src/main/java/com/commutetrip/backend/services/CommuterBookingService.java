@@ -1,5 +1,6 @@
 package com.commutetrip.backend.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,5 +33,21 @@ public class CommuterBookingService {
 
     public List<CommuterBookingEntity> findAllByCommuterIdAndTruckRouteId(Long commuterId, Long truckRouteId) {
         return service.findAllByCommuterIdAndTruckRouteId(commuterId, truckRouteId);
+    }
+
+    public List<CommuterBookingEntity> findAllBookings() {
+        return service.findAllBookings();
+    }
+
+    public List<CommuterBookingEntity> findBookings(Long commuterId, Long truckRouteId) {
+        if(commuterId != null && truckRouteId != null) {
+            return findAllByCommuterIdAndTruckRouteId(commuterId, truckRouteId);
+        } else if (commuterId != null) {
+            return findAllByCommuterId(commuterId);
+        } else if (truckRouteId != null) {
+            return findAllByTruckRouteId(truckRouteId);
+        } else {
+            return findAllBookings();
+        }
     }
 }
