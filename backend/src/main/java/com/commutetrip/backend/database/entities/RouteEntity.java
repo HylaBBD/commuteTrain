@@ -1,6 +1,4 @@
-package com.commutetrip.backend.models;
-
-import java.sql.Timestamp;
+package com.commutetrip.backend.database.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "routes")
-public class Route {
+public class RouteEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "route_id")
@@ -29,17 +27,9 @@ public class Route {
   @Column(name = "end_point")
   private Long endPoint;
 
-  @Column(name = "pickup_time")
-  private Timestamp pickupTime;
-
-  @Column(name = "drop_off_time")
-  private Timestamp dropOffTime;
-
-  public Route(Long startingPoint, Long endPoint, Timestamp pickupTime, Timestamp dropOffTime) {
+  public RouteEntity(Long startingPoint, Long endPoint) {
     this.startingPoint = startingPoint;
     this.endPoint = endPoint;
-    this.pickupTime = pickupTime;
-    this.dropOffTime = dropOffTime;
   }
 
 }

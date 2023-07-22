@@ -1,34 +1,30 @@
 package com.commutetrip.backend.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.GenerationType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
-@Entity
+@Getter
 @NoArgsConstructor
-@Table(name = "commuters")
 public class Commuter {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "commuter_id")
-  private Long commuterId;
+    private Long commuterId;
+    private String commuterName;
+    private Long awsUserId;
 
-  @Column(name = "commuter_name")
-  private String commuterName;
+    public Commuter(Long commuterId, String commuterName, Long awsUserId) {
+        this.commuterId = commuterId;
+        this.commuterName = commuterName;
+        this.awsUserId = awsUserId;
+    }
 
-  @Column(name = "route_id")
-  private Long routeId;
+    public Commuter(String commuterName, Long awsUserId) {
+        this.commuterName = commuterName;
+        this.awsUserId = awsUserId;
+    }
 
-  public Commuter(String commuterName, Long routeId) {
-    this.commuterName = commuterName;
-    this.routeId = routeId;
-  }
+    public Commuter(Long commuterId, String commuterName) {
+        this.commuterId = commuterId;
+        this.commuterName = commuterName;
+    }
 }
