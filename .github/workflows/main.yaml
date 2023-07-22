@@ -48,7 +48,7 @@ jobs:
           IMAGE_TAG: "latest"
         with:
           context: ./backend
-          file: ./Dockerfile
+          file: ./backend/Dockerfile
           push: true
           platforms: linux/amd64
           tags: ${{env.ECR_REGISTRY}}/${{env.ECR_REPOSITORY}}:${{env.IMAGE_TAG}}
