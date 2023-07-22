@@ -1,6 +1,7 @@
 package com.commutetrip.backend.controllers;
 
 import com.commutetrip.backend.database.entities.CommuterEntity;
+import com.commutetrip.backend.models.Commuter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -27,7 +28,7 @@ public class CommuterController {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
     })
     @GetMapping("")
-    public ResponseEntity<List<CommuterEntity>> getAllCommuters() {
+    public ResponseEntity<List<Commuter>> getAllCommuters() {
         return new ResponseEntity<>(commuterService.findAllCommuters(), HttpStatus.OK);
     }
 
@@ -37,7 +38,7 @@ public class CommuterController {
             @ApiResponse(responseCode = "404", description = "Not Found"),
     })
     @GetMapping("/commuter")
-    public ResponseEntity<CommuterEntity> getCommuter(
+    public ResponseEntity<Commuter> getCommuter(
             @RequestParam(value = "name", required = false)
             @Parameter( name = "name", description = "Name of Commuter", example = "Jeff Surname")
             String name,
@@ -54,9 +55,9 @@ public class CommuterController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Successfully Created"),
     })
-    @PostMapping("/commuter")
-    public ResponseEntity<CommuterEntity> saveCommuter(
-            @RequestBody CommuterEntity commuter
+    @PostMapping("")
+    public ResponseEntity<Commuter> saveCommuter(
+            @RequestBody Commuter commuter
     ) {
         return new ResponseEntity<>(commuterService.saveCommuter(commuter), HttpStatus.CREATED);
     }

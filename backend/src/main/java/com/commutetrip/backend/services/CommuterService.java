@@ -21,21 +21,32 @@ public class CommuterService {
                 commuter.getCommuterName()
         );
     }
-    public Optional<CommuterEntity> findCommuter(String name, Long id) {
+    public Optional<Commuter> findCommuter(String name, Long id) {
         if (id != null) {
-            return findByCommuterId(id);
+            return getCommuter(id);
         } else if (name != null) {
-            return findByCommuterName(name);
+            return findByCommuterName(name)
+                    .map(this::mapCommuter);
         }
         return Optional.empty();
     }
 
-    public CommuterEntity saveCommuter(CommuterEntity commuter) {
-        return service.saveCommuter(commuter);
+    public Commuter saveCommuter(Commuter commuter) {
+        // Call aws to save commuter and get aws_sub_id
+        CommuterEntity savedCommuter = service.saveCommuter(new CommuterEntity(
+                commuter.commuterName(),
+                0L
+        ));
+        return new Commuter(
+                savedCommuter.getCommuterId(),
+                savedCommuter.getCommuterName()
+        );
     }
 
-    public List<CommuterEntity> findAllCommuters() {
-        return service.findAllCommuters();
+    public List<Commuter> findAllCommuters() {
+        return service.findAllCommuters()
+                .stream().map(this::mapCommuter)
+                .collect(Collectors.toList());
     }
 
     public Optional<CommuterEntity> findByAwsUserId(Long awsUserId) {
