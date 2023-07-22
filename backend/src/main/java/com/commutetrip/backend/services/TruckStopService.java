@@ -5,7 +5,7 @@ import com.commutetrip.backend.models.TruckStop;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.commutetrip.backend.database.repositories.impl.TruckStopRepositoryImpl;
+import com.commutetrip.backend.database.services.TruckStopDBService;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,7 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class TruckStopService {
-    private final TruckStopRepositoryImpl truckStopRepository;
+    private final TruckStopDBService service;
 
     private TruckStop mapTruckStop(TruckStopEntity truckStop){
         return new TruckStop(
@@ -23,15 +23,15 @@ public class TruckStopService {
         );
     }
     public TruckStopEntity saveTruckStop(TruckStopEntity truckStop) {
-        return truckStopRepository.saveTruckStop(truckStop);
+        return service.saveTruckStop(truckStop);
     }
 
     public List<TruckStopEntity> findAllTruckStops() {
-        return truckStopRepository.findAllTruckStops();
+        return service.findAllTruckStops();
     }
 
     public Optional<TruckStopEntity> findByStopId(Long stopId) {
-        return truckStopRepository.findByStopId(stopId);
+        return service.findByStopId(stopId);
     }
 
     public Optional<TruckStop> getTruckStop(Long stopId) {
