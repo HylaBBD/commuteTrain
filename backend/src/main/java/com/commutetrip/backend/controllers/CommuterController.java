@@ -1,10 +1,12 @@
 package com.commutetrip.backend.controllers;
 
+import com.commutetrip.backend.database.entities.CommuterEntity;
 import com.commutetrip.backend.models.Commuter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import com.commutetrip.backend.services.CommuterService;
 import java.util.List;
 
 @RequiredArgsConstructor
+@Tag(name = "Commuters")
 @RestController
 @RequestMapping("api/commute-train/commuters")
 public class CommuterController {
@@ -52,7 +55,7 @@ public class CommuterController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Successfully Created"),
     })
-    @PostMapping("/commuter")
+    @PostMapping("")
     public ResponseEntity<Commuter> saveCommuter(
             @RequestBody Commuter commuter
     ) {

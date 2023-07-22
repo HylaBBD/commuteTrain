@@ -37,4 +37,8 @@ public class CommuterBookingDBService {
     public List<CommuterBookingEntity> findAllByCommuterIdAndTruckRouteId(Long commuterId, Long truckRouteId) {
         return repository.findAllByCommuterIdAndTruckRouteId(commuterId, truckRouteId);
     }
+
+    public List<CommuterBookingEntity> findAllBookings() {
+        return repository.findAll();
+    }
 }
