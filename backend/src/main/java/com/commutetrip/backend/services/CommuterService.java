@@ -1,6 +1,5 @@
 package com.commutetrip.backend.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -16,18 +15,27 @@ import org.springframework.stereotype.Service;
 public class CommuterService {
     private final CommuterDBService service;
 
-    private Optional<Commuter> mapEntityToModel(Optional<CommuterEntity> commuterEntity) {
-        return commuterEntity.map(entity -> new Commuter(
-                entity.getCommuterId(),
-                entity.getCommuterName(),
-                entity.getAwsUserId()
-        ));
+    private Commuter mapCommuter(CommuterEntity commuter){
+        return new Commuter(
+                commuter.getCommuterId(),
+                commuter.getCommuterName()
+        );
+    }
+    public Optional<Commuter> findCommuter(String name, Long id) {
+        if (id != null) {
+            return getCommuter(id);
+        } else if (name != null) {
+            return findByCommuterName(name)
+                    .map(this::mapCommuter);
+        }
+        return Optional.empty();
     }
 
     public Commuter saveCommuter(Commuter commuter) {
+        // Call aws to save commuter and get aws_sub_id
         CommuterEntity savedCommuter = service.saveCommuter(new CommuterEntity(
-                commuter.getCommuterName(),
-                commuter.getAwsUserId()
+                commuter.commuterName(),
+                0L
         ));
         return new Commuter(
                 savedCommuter.getCommuterId(),
@@ -37,35 +45,24 @@ public class CommuterService {
 
     public List<Commuter> findAllCommuters() {
         return service.findAllCommuters()
-                .stream()
-                .map(commuterEntity -> new Commuter(
-                        commuterEntity.getCommuterId(),
-                        commuterEntity.getCommuterName()
-                ))
+                .stream().map(this::mapCommuter)
                 .collect(Collectors.toList());
     }
 
-    public Optional<Commuter> findCommuter(String name, Long id) {
-        if (id != null) {
-            return findByCommuterId(id);
-        } else if (name != null) {
-            return findByCommuterName(name);
-        }
-        return Optional.empty();
+    public Optional<CommuterEntity> findByAwsUserId(Long awsUserId) {
+        return service.findByAwsUserId(awsUserId);
     }
 
-    public Optional<Commuter> findByAwsUserId(Long awsUserId) {
-        Optional<CommuterEntity> commuterEntity = service.findByAwsUserId(awsUserId);
-        return mapEntityToModel(commuterEntity);
+    public Optional<CommuterEntity> findByCommuterName(String name) {
+        return service.findByCommuterName(name);
     }
 
-    public Optional<Commuter> findByCommuterName(String name) {
-        Optional<CommuterEntity> commuterEntity = service.findByCommuterName(name);
-        return mapEntityToModel(commuterEntity);
+    public Optional<CommuterEntity> findByCommuterId(Long commuterId) {
+        return service.findByCommuterId(commuterId);
     }
 
-    public Optional<Commuter> findByCommuterId(Long commuterId) {
-        Optional<CommuterEntity> commuterEntity = service.findByCommuterId(commuterId);
-        return mapEntityToModel(commuterEntity);
+    public Optional<Commuter> getCommuter(Long commuterId){
+        return findByCommuterId(commuterId)
+                .map(this::mapCommuter);
     }
 }
