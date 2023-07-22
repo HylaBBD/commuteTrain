@@ -6,7 +6,7 @@ import com.commutetrip.backend.models.TrainingTruck;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.commutetrip.backend.database.services.TrainingTruckDBService;
+import com.commutetrip.backend.database.repositories.impl.TrainingTruckRepositoryImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class TrainingTruckService {
-    private final TrainingTruckDBService trainingTruckDBService;
+    private final TrainingTruckRepositoryImpl trainingTruckRepository;
     private final RouteService routeService;
 
     private TrainingTruck mapTrainingTruck(TrainingTruckEntity trainingTruck) {
@@ -26,19 +26,19 @@ public class TrainingTruckService {
     }
 
     public TrainingTruckEntity saveTrainingTruck(TrainingTruckEntity trainingTruck) {
-        return trainingTruckDBService.saveTrainingTruck(trainingTruck);
+        return trainingTruckRepository.saveTrainingTruck(trainingTruck);
     }
 
     public List<TrainingTruckEntity> findAllTrainingTrucks() {
-        return trainingTruckDBService.findAllTrainingTrucks();
+        return trainingTruckRepository.findAllTrainingTrucks();
     }
 
     public Optional<TrainingTruckEntity> findByTruckId(Long truckId) {
-        return trainingTruckDBService.findByTruckId(truckId);
+        return trainingTruckRepository.findByTruckId(truckId);
     }
 
     public List<TrainingTruckEntity> findAllByRouteId(Long routeId) {
-        return trainingTruckDBService.findAllByRouteId(routeId);
+        return trainingTruckRepository.findAllByRouteId(routeId);
     }
 
     public Optional<TrainingTruck> getTrainingTruck(Long truckId) {

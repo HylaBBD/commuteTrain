@@ -6,7 +6,7 @@ import com.commutetrip.backend.models.TruckRoute;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.commutetrip.backend.database.services.TruckRouteDBService;
+import com.commutetrip.backend.database.repositories.impl.TruckRouteRepositoryImpl;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class TruckRouteService {
-    private final TruckRouteDBService truckRouteDBService;
+    private final TruckRouteRepositoryImpl truckRouteRepository;
     private final RouteService routeService;
 
     private TruckRoute mapTruckRoute(TruckRouteEntity truckRoute) {
@@ -29,27 +29,27 @@ public class TruckRouteService {
     }
 
     public TruckRouteEntity saveTruckRoute(TruckRouteEntity truckRoute) {
-        return truckRouteDBService.saveTruckRoute(truckRoute);
+        return truckRouteRepository.saveTruckRoute(truckRoute);
     }
 
     public List<TruckRouteEntity> findAllTruckRoutes() {
-        return truckRouteDBService.findAllTruckRoutes();
+        return truckRouteRepository.findAllTruckRoutes();
     }
 
     public Optional<TruckRouteEntity> findByTruckRouteId(Long truckRouteId) {
-        return truckRouteDBService.findByTruckRouteId(truckRouteId);
+        return truckRouteRepository.findByTruckRouteId(truckRouteId);
     }
 
     public List<TruckRouteEntity> findAllByRouteId(Long routeId) {
-        return truckRouteDBService.findAllByRouteId(routeId);
+        return truckRouteRepository.findAllByRouteId(routeId);
     }
 
     public List<TruckRouteEntity> findAllByPickupTime(Timestamp pickupTime) {
-        return truckRouteDBService.findAllByPickupTime(pickupTime);
+        return truckRouteRepository.findAllByPickupTime(pickupTime);
     }
 
     public List<TruckRouteEntity> findAllByDropOffTime(Timestamp dropOffTime) {
-        return truckRouteDBService.findAllByDropOffTime(dropOffTime);
+        return truckRouteRepository.findAllByDropOffTime(dropOffTime);
     }
 
     public Optional<TruckRoute> getTruckRoute(Long truckRouteId) {

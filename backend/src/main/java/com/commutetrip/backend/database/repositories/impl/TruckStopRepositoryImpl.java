@@ -1,4 +1,4 @@
-package com.commutetrip.backend.database.services;
+package com.commutetrip.backend.database.repositories.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,11 +10,11 @@ import com.commutetrip.backend.database.repositories.TruckStopRepository;
 import com.commutetrip.backend.database.entities.TruckStopEntity;
 
 @Service
-public class TruckStopDBService {
+public class TruckStopRepositoryImpl {
     private TruckStopRepository repository;
 
     @Autowired
-    public TruckStopDBService(TruckStopRepository repository) {
+    public TruckStopRepositoryImpl(TruckStopRepository repository) {
         this.repository = repository;
     }
 
