@@ -1,5 +1,6 @@
 package com.commutetrip.backend.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,13 +10,13 @@ import com.commutetrip.backend.models.TruckRoute;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import com.commutetrip.backend.database.repositories.impl.CommuterBookingRepositoryImpl;
+import com.commutetrip.backend.database.services.CommuterBookingDBService;
 import com.commutetrip.backend.database.entities.CommuterBookingEntity;
 
 @RequiredArgsConstructor
 @Service
 public class CommuterBookingService {
-    private final CommuterBookingRepositoryImpl commuterBookingRepository;
+    private final CommuterBookingDBService service;
     private final CommuterService commuterService;
     private final TruckRouteService truckRouteService;
 
@@ -30,27 +31,27 @@ public class CommuterBookingService {
     }
 
     public CommuterBookingEntity saveBooking(CommuterBookingEntity booking) {
-        return commuterBookingRepository.saveBooking(booking);
+        return service.saveBooking(booking);
     }
 
     public Optional<CommuterBookingEntity> findByBookingId(Long bookingId) {
-        return commuterBookingRepository.findByBookingId(bookingId);
+        return service.findByBookingId(bookingId);
     }
 
     public List<CommuterBookingEntity> findAllByCommuterId(Long commuterId) {
-        return commuterBookingRepository.findAllByCommuterId(commuterId);
+        return service.findAllByCommuterId(commuterId);
     }
 
     public List<CommuterBookingEntity> findAllByTruckRouteId(Long truckRouteId) {
-        return commuterBookingRepository.findAllByTruckRouteId(truckRouteId);
+        return service.findAllByTruckRouteId(truckRouteId);
     }
 
     public List<CommuterBookingEntity> findAllByCommuterIdAndTruckRouteId(Long commuterId, Long truckRouteId) {
-        return commuterBookingRepository.findAllByCommuterIdAndTruckRouteId(commuterId, truckRouteId);
+        return service.findAllByCommuterIdAndTruckRouteId(commuterId, truckRouteId);
     }
 
     public List<CommuterBookingEntity> findAllBookings() {
-        return commuterBookingRepository.findAllBookings();
+        return service.findAllBookings();
     }
 
     public List<CommuterBookingEntity> findBookings(Long commuterId, Long truckRouteId) {
