@@ -1,11 +1,10 @@
 package com.commutetrip.backend.services;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
 import com.commutetrip.backend.database.entities.RouteEntity;
-import com.commutetrip.backend.database.services.RouteDBService;
+import com.commutetrip.backend.database.repositories.impl.RouteRepositoryImpl;
 import com.commutetrip.backend.models.Route;
 import com.commutetrip.backend.models.TruckStop;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class RouteService {
-    private final RouteDBService routeDBService;
+    private final RouteRepositoryImpl routeRepository;
     private final TruckStopService truckStopService;
 
     private Route mapRoute(RouteEntity route) {
@@ -27,27 +26,27 @@ public class RouteService {
         );
     }
     public RouteEntity saveRoute(RouteEntity route) {
-        return routeDBService.saveRoute(route);
+        return routeRepository.saveRoute(route);
     }
 
     public List<RouteEntity> findAllRoutes() {
-        return routeDBService.findAllRoutes();
+        return routeRepository.findAllRoutes();
     }
 
     public Optional<RouteEntity> findByRouteId(Long routeId) {
-        return routeDBService.findByRouteId(routeId);
+        return routeRepository.findByRouteId(routeId);
     }
 
     public List<RouteEntity> findAllByStartingPoint(Long startingPoint) {
-        return routeDBService.findAllByStartingPoint(startingPoint);
+        return routeRepository.findAllByStartingPoint(startingPoint);
     }
 
     public List<RouteEntity> findAllByEndPoint(Long endPoint) {
-        return routeDBService.findAllByEndPoint(endPoint);
+        return routeRepository.findAllByEndPoint(endPoint);
     }
 
     public Optional<RouteEntity> findByStartingPointAndEndPoint(Long startingPoint, Long endPoint) {
-        return routeDBService.findByStartingPointAndEndPoint(startingPoint, endPoint);
+        return routeRepository.findByStartingPointAndEndPoint(startingPoint, endPoint);
     }
 
     public Optional<Route> getRoute(Long routeId) {
