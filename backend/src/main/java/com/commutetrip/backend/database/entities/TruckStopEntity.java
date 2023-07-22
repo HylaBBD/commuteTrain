@@ -1,4 +1,4 @@
-package com.commutetrip.backend.database.models;
+package com.commutetrip.backend.database.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "truck_stops")
-public class TruckStop {
+public class TruckStopEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "stop_id")

@@ -1,4 +1,4 @@
-package com.commutetrip.backend.database.models;
+package com.commutetrip.backend.database.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "routes")
-public class Route {
+public class RouteEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "route_id")
@@ -27,7 +27,7 @@ public class Route {
   @Column(name = "end_point")
   private Long endPoint;
 
-  public Route(Long startingPoint, Long endPoint) {
+  public RouteEntity(Long startingPoint, Long endPoint) {
     this.startingPoint = startingPoint;
     this.endPoint = endPoint;
   }
