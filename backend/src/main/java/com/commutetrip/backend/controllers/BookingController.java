@@ -1,6 +1,7 @@
 package com.commutetrip.backend.controllers;
 
 import com.commutetrip.backend.database.entities.CommuterBookingEntity;
+import com.commutetrip.backend.models.CommuterBooking;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -44,12 +45,12 @@ public class BookingController {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
     })
     @GetMapping("/{bookingId}")
-    public ResponseEntity<CommuterBookingEntity> getBooking(
+    public ResponseEntity<CommuterBooking> getBooking(
             @PathVariable("bookingId")
             @Parameter( name = "bookingId", description = "Id of Booking", example = "1")
             Long bookingId
     ) {
-        return commuterBookingService.findByBookingId(bookingId)
+        return commuterBookingService.getBooking(bookingId)
                 .map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

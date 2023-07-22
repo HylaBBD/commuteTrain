@@ -15,7 +15,12 @@ import org.springframework.stereotype.Service;
 public class CommuterService {
     private final CommuterDBService service;
 
-
+    private Commuter mapCommuter(CommuterEntity commuter){
+        return new Commuter(
+                commuter.getCommuterId(),
+                commuter.getCommuterName()
+        );
+    }
     public Optional<CommuterEntity> findCommuter(String name, Long id) {
         if (id != null) {
             return findByCommuterId(id);
@@ -43,5 +48,10 @@ public class CommuterService {
 
     public Optional<CommuterEntity> findByCommuterId(Long commuterId) {
         return service.findByCommuterId(commuterId);
+    }
+
+    public Optional<Commuter> getCommuter(Long commuterId){
+        return findByCommuterId(commuterId)
+                .map(this::mapCommuter);
     }
 }

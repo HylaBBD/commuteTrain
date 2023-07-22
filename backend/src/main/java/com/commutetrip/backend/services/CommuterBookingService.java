@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.commutetrip.backend.models.Commuter;
+import com.commutetrip.backend.models.CommuterBooking;
+import com.commutetrip.backend.models.TruckRoute;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,18 @@ import com.commutetrip.backend.database.entities.CommuterBookingEntity;
 @Service
 public class CommuterBookingService {
     private final CommuterBookingDBService service;
+    private final CommuterService commuterService;
+    private final TruckRouteService truckRouteService;
+
+    private CommuterBooking mapBooking(CommuterBookingEntity booking) {
+        Optional<TruckRoute> truckRoute = truckRouteService.getTruckRoute(booking.getTruckRouteId());
+        Optional<Commuter> commuter = commuterService.getCommuter(booking.getCommuterId());
+        return new CommuterBooking(
+                booking.getBookingId(),
+                commuter.orElseThrow(),
+                truckRoute.orElseThrow()
+        );
+    }
 
     public CommuterBookingEntity saveBooking(CommuterBookingEntity booking) {
         return service.saveBooking(booking);
@@ -49,5 +64,10 @@ public class CommuterBookingService {
         } else {
             return findAllBookings();
         }
+    }
+
+    public Optional<CommuterBooking> getBooking(Long bookingId) {
+        return findByBookingId(bookingId)
+                .map(this::mapBooking);
     }
 }
