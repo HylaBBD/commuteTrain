@@ -31,7 +31,7 @@ jobs:
         run: mvn clean install
 
       # this step uses Github OIDC to assume the role in the sandbox account (the permissions section above is required for this to work)
-      - name: Configure AWS credentials from Sandbox account
+      - name: Configure AWS credentials from Grad GP1 account
         uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: ${{env.ROLE_TO_ASSUME}}
@@ -47,8 +47,8 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           IMAGE_TAG: "latest"
         with:
-          context: .
-          file: ./backend/Dockerfile
+          context: ./backend
+          file: Dockerfile
           push: true
           platforms: linux/amd64
           tags: ${{env.ECR_REGISTRY}}/${{env.ECR_REPOSITORY}}:${{env.IMAGE_TAG}}
