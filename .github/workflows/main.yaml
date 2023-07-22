@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 env:
   ROLE_TO_ASSUME: "arn:aws:iam::179530787873:role/GitHubAction-AssumeRoleWithAction"
