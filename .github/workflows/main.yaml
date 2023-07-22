@@ -27,6 +27,7 @@ jobs:
           distribution: "temurin" # See 'Supported distributions' for available options
           java-version: "17"
       - name: Build with Maven
+        working-directory: ./backend
         run: mvn clean install
 
       # this step uses Github OIDC to assume the role in the sandbox account (the permissions section above is required for this to work)
