@@ -27,4 +27,7 @@ public class TruckStopEntity {
   @Column(name = "stop_longitude")
   private Double stopLongitude;
 
+  @Column(name = "address")
+  private String address;
+
 }

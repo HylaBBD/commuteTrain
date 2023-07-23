@@ -19,7 +19,8 @@ public class TruckStopService {
         return new TruckStop(
                 truckStop.getStopId(),
                 truckStop.getStopLatitude(),
-                truckStop.getStopLongitude()
+                truckStop.getStopLongitude(),
+                truckStop.getAddress()
         );
     }
     public TruckStopEntity saveTruckStop(TruckStopEntity truckStop) {
