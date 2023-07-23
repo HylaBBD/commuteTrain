@@ -1,6 +1,5 @@
 package com.commutetrip.backend.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +20,7 @@ public class CommuterBookingService {
     private final TruckRouteService truckRouteService;
 
     private CommuterBooking mapBooking(CommuterBookingEntity booking) {
-        Optional<TruckRoute> truckRoute = truckRouteService.getTruckRoute(booking.getTruckRouteId());
+        Optional<TruckRoute> truckRoute = truckRouteService.getTruckRouteById(booking.getTruckRouteId());
         Optional<Commuter> commuter = commuterService.getCommuter(booking.getCommuterId());
         return new CommuterBooking(
                 booking.getBookingId(),
