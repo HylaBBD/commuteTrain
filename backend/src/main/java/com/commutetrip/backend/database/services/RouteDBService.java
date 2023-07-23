@@ -37,7 +37,7 @@ public class RouteDBService {
         return repository.findAllByEndPoint(endPoint);
     }
 
-    public Optional<RouteEntity> findByStartingPointAndEndPoint(Long startingPoint, Long endPoint) {
-        return repository.findByStartingPointAndEndPoint(startingPoint, endPoint);
+    public List<RouteEntity> findAllByStartingPointAndEndPoint(Long startingPoint, Long endPoint) {
+        return repository.findAllByStartingPointAndEndPoint(startingPoint, endPoint);
     }
 }

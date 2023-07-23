@@ -12,5 +12,5 @@ public interface RouteRepository extends JpaRepository<RouteEntity, Long> {
     Optional<RouteEntity> findByRouteId(Long routeId);
     List<RouteEntity> findAllByStartingPoint(Long startingPoint);
     List<RouteEntity> findAllByEndPoint(Long endPoint);
-    Optional<RouteEntity> findByStartingPointAndEndPoint(Long startingPoint, Long endPoint);
+    List<RouteEntity> findAllByStartingPointAndEndPoint(Long startingPoint, Long endPoint);
 }

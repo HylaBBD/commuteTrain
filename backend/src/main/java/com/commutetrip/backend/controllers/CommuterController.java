@@ -23,7 +23,7 @@ import java.util.List;
 public class CommuterController {
     private final CommuterService commuterService;
 
-    @Operation(summary = "Get all Commuters", description = "Returns an Array of Commuters")
+    @Operation(summary = "Get all Commuters", description = "Returns an array of Commuters")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
     })

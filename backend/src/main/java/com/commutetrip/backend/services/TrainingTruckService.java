@@ -18,7 +18,7 @@ public class TrainingTruckService {
     private final RouteService routeService;
 
     private TrainingTruck mapTrainingTruck(TrainingTruckEntity trainingTruck) {
-        Optional<Route> route = routeService.getRoute(trainingTruck.getRouteId());
+        Optional<Route> route = routeService.getRouteById(trainingTruck.getRouteId());
         return new TrainingTruck(
                 trainingTruck.getTruckId(),
                 route.orElseThrow()

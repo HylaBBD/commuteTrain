@@ -19,7 +19,7 @@ public class TruckRouteService {
     private final RouteService routeService;
 
     private TruckRoute mapTruckRoute(TruckRouteEntity truckRoute) {
-        Optional<Route> route = routeService.getRoute(truckRoute.getRouteId());
+        Optional<Route> route = routeService.getRouteById(truckRoute.getRouteId());
         return new TruckRoute(
                 truckRoute.getTruckRouteId(),
                 route.orElseThrow(),

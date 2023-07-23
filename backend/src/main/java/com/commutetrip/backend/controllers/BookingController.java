@@ -43,6 +43,7 @@ public class BookingController {
     @Operation(summary = "Get a Commuter Bookings", description = "Get a Commuter Bookings by Booking Id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
     })
     @GetMapping("/{bookingId}")
     public ResponseEntity<CommuterBooking> getBooking(
