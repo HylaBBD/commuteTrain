@@ -18,10 +18,6 @@ public class TruckStopDBService {
         this.repository = repository;
     }
 
-    public TruckStopEntity saveTruckStop(TruckStopEntity truckStop) {
-        return repository.saveAndFlush(truckStop);
-    }
-
     public List<TruckStopEntity> findAllTruckStops() {
         return repository.findAll();
     }

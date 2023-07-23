@@ -1,21 +1,21 @@
 package com.commutetrip.backend.controllers;
 
-import com.commutetrip.backend.database.entities.CommuterBookingEntity;
-import com.commutetrip.backend.models.CommuterBooking;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-
-import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+import com.commutetrip.backend.database.entities.CommuterBookingEntity;
 import com.commutetrip.backend.services.CommuterBookingService;
+import com.commutetrip.backend.models.CommuterBooking;
 
 @RequiredArgsConstructor
 @Tag(name = "Bookings")
@@ -29,7 +29,7 @@ public class BookingController {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
     })
     @GetMapping("")
-    public ResponseEntity<List<CommuterBookingEntity>> getBookings(
+    public ResponseEntity<List<CommuterBooking>> getBookings(
             @RequestParam(value = "commuterId", required = false)
             @Parameter( name = "commuterId", description = "Id of Commuter", example = "1")
             Long commuterId,
@@ -43,6 +43,7 @@ public class BookingController {
     @Operation(summary = "Get a Commuter Bookings", description = "Get a Commuter Bookings by Booking Id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
     })
     @GetMapping("/{bookingId}")
     public ResponseEntity<CommuterBooking> getBooking(
@@ -60,7 +61,7 @@ public class BookingController {
             @ApiResponse(responseCode = "201", description = "Successfully Created"),
     })
     @PostMapping("")
-    public ResponseEntity<CommuterBookingEntity> saveBooking(
+    public ResponseEntity<CommuterBooking> saveBooking(
             @RequestBody CommuterBookingEntity booking
     ) {
         return new ResponseEntity<>(commuterBookingService.saveBooking(booking), HttpStatus.CREATED);

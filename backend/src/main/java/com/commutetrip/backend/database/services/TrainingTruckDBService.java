@@ -18,10 +18,6 @@ public class TrainingTruckDBService {
         this.repository = repository;
     }
 
-    public TrainingTruckEntity saveTrainingTruck(TrainingTruckEntity trainingTruck) {
-        return repository.saveAndFlush(trainingTruck);
-    }
-
     public List<TrainingTruckEntity> findAllTrainingTrucks() {
         return repository.findAll();
     }

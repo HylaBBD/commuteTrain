@@ -1,20 +1,20 @@
 package com.commutetrip.backend.controllers;
 
-import com.commutetrip.backend.database.entities.CommuterEntity;
-import com.commutetrip.backend.models.Commuter;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+import lombok.RequiredArgsConstructor;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 import com.commutetrip.backend.services.CommuterService;
-
-import java.util.List;
+import com.commutetrip.backend.models.Commuter;
 
 @RequiredArgsConstructor
 @Tag(name = "Commuters")
@@ -23,7 +23,7 @@ import java.util.List;
 public class CommuterController {
     private final CommuterService commuterService;
 
-    @Operation(summary = "Get all Commuters", description = "Returns an Array of Commuters")
+    @Operation(summary = "Get all Commuters", description = "Returns an array of Commuters")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
     })
