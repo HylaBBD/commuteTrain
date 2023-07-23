@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 
@@ -31,28 +32,36 @@ public class CommuterBookingService {
         );
     }
 
-    public CommuterBookingEntity saveBooking(CommuterBookingEntity booking) {
-        return commuterBookingDBService.saveBooking(booking);
+    public CommuterBooking saveBooking(CommuterBookingEntity booking) {
+        return mapBooking(commuterBookingDBService.saveBooking(booking));
     }
 
 
-    private List<CommuterBookingEntity> findAllByCommuterId(Long commuterId) {
-        return commuterBookingDBService.findAllByCommuterId(commuterId);
+    private List<CommuterBooking> findAllByCommuterId(Long commuterId) {
+        return commuterBookingDBService.findAllByCommuterId(commuterId)
+                .stream().map(this::mapBooking)
+                .collect(Collectors.toList());
     }
 
-    private List<CommuterBookingEntity> findAllByTruckRouteId(Long truckRouteId) {
-        return commuterBookingDBService.findAllByTruckRouteId(truckRouteId);
+    private List<CommuterBooking> findAllByTruckRouteId(Long truckRouteId) {
+        return commuterBookingDBService.findAllByTruckRouteId(truckRouteId)
+                .stream().map(this::mapBooking)
+                .collect(Collectors.toList());
     }
 
-    private List<CommuterBookingEntity> findAllByCommuterIdAndTruckRouteId(Long commuterId, Long truckRouteId) {
-        return commuterBookingDBService.findAllByCommuterIdAndTruckRouteId(commuterId, truckRouteId);
+    private List<CommuterBooking> findAllByCommuterIdAndTruckRouteId(Long commuterId, Long truckRouteId) {
+        return commuterBookingDBService.findAllByCommuterIdAndTruckRouteId(commuterId, truckRouteId)
+                .stream().map(this::mapBooking)
+                .collect(Collectors.toList());
     }
 
-    private List<CommuterBookingEntity> findAllBookings() {
-        return commuterBookingDBService.findAllBookings();
+    private List<CommuterBooking> findAllBookings() {
+        return commuterBookingDBService.findAllBookings()
+                .stream().map(this::mapBooking)
+                .collect(Collectors.toList());
     }
 
-    public List<CommuterBookingEntity> findBookings(Long commuterId, Long truckRouteId) {
+    public List<CommuterBooking> findBookings(Long commuterId, Long truckRouteId) {
         if(commuterId != null && truckRouteId != null) {
             return findAllByCommuterIdAndTruckRouteId(commuterId, truckRouteId);
         } else if (commuterId != null) {

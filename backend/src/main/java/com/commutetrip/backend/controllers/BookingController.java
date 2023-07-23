@@ -29,7 +29,7 @@ public class BookingController {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
     })
     @GetMapping("")
-    public ResponseEntity<List<CommuterBookingEntity>> getBookings(
+    public ResponseEntity<List<CommuterBooking>> getBookings(
             @RequestParam(value = "commuterId", required = false)
             @Parameter( name = "commuterId", description = "Id of Commuter", example = "1")
             Long commuterId,
@@ -61,7 +61,7 @@ public class BookingController {
             @ApiResponse(responseCode = "201", description = "Successfully Created"),
     })
     @PostMapping("")
-    public ResponseEntity<CommuterBookingEntity> saveBooking(
+    public ResponseEntity<CommuterBooking> saveBooking(
             @RequestBody CommuterBookingEntity booking
     ) {
         return new ResponseEntity<>(commuterBookingService.saveBooking(booking), HttpStatus.CREATED);
