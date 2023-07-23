@@ -1,21 +1,23 @@
 package com.commutetrip.backend.services;
 
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
-import com.commutetrip.backend.models.Commuter;
-import com.commutetrip.backend.models.CommuterBooking;
-import com.commutetrip.backend.models.TruckRoute;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import com.commutetrip.backend.database.services.CommuterBookingDBService;
 import com.commutetrip.backend.database.entities.CommuterBookingEntity;
 
+import com.commutetrip.backend.models.Commuter;
+import com.commutetrip.backend.models.CommuterBooking;
+import com.commutetrip.backend.models.TruckRoute;
+
 @RequiredArgsConstructor
 @Service
 public class CommuterBookingService {
-    private final CommuterBookingDBService service;
+    private final CommuterBookingDBService commuterBookingDBService;
     private final CommuterService commuterService;
     private final TruckRouteService truckRouteService;
 
@@ -30,27 +32,24 @@ public class CommuterBookingService {
     }
 
     public CommuterBookingEntity saveBooking(CommuterBookingEntity booking) {
-        return service.saveBooking(booking);
+        return commuterBookingDBService.saveBooking(booking);
     }
 
-    public Optional<CommuterBookingEntity> findByBookingId(Long bookingId) {
-        return service.findByBookingId(bookingId);
+
+    private List<CommuterBookingEntity> findAllByCommuterId(Long commuterId) {
+        return commuterBookingDBService.findAllByCommuterId(commuterId);
     }
 
-    public List<CommuterBookingEntity> findAllByCommuterId(Long commuterId) {
-        return service.findAllByCommuterId(commuterId);
+    private List<CommuterBookingEntity> findAllByTruckRouteId(Long truckRouteId) {
+        return commuterBookingDBService.findAllByTruckRouteId(truckRouteId);
     }
 
-    public List<CommuterBookingEntity> findAllByTruckRouteId(Long truckRouteId) {
-        return service.findAllByTruckRouteId(truckRouteId);
+    private List<CommuterBookingEntity> findAllByCommuterIdAndTruckRouteId(Long commuterId, Long truckRouteId) {
+        return commuterBookingDBService.findAllByCommuterIdAndTruckRouteId(commuterId, truckRouteId);
     }
 
-    public List<CommuterBookingEntity> findAllByCommuterIdAndTruckRouteId(Long commuterId, Long truckRouteId) {
-        return service.findAllByCommuterIdAndTruckRouteId(commuterId, truckRouteId);
-    }
-
-    public List<CommuterBookingEntity> findAllBookings() {
-        return service.findAllBookings();
+    private List<CommuterBookingEntity> findAllBookings() {
+        return commuterBookingDBService.findAllBookings();
     }
 
     public List<CommuterBookingEntity> findBookings(Long commuterId, Long truckRouteId) {
@@ -66,7 +65,7 @@ public class CommuterBookingService {
     }
 
     public Optional<CommuterBooking> getBooking(Long bookingId) {
-        return findByBookingId(bookingId)
+        return commuterBookingDBService.findByBookingId(bookingId)
                 .map(this::mapBooking);
     }
 }

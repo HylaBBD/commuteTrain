@@ -1,20 +1,20 @@
 package com.commutetrip.backend.controllers;
 
-import com.commutetrip.backend.database.entities.CommuterBookingEntity;
-import com.commutetrip.backend.models.CommuterBooking;
-import com.commutetrip.backend.models.TruckRoute;
-import com.commutetrip.backend.services.TruckRouteService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import lombok.RequiredArgsConstructor;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+import com.commutetrip.backend.models.TruckRoute;
+import com.commutetrip.backend.services.TruckRouteService;
 
 @RequiredArgsConstructor
 @Tag(name = "Truck-Routes")

@@ -1,4 +1,5 @@
 package com.commutetrip.backend.database.services;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,6 @@ public class RouteDBService {
     @Autowired
     public RouteDBService(RouteRepository repository) {
         this.repository = repository;
-    }
-
-    public RouteEntity saveRoute(RouteEntity route) {
-        return repository.saveAndFlush(route);
     }
 
     public List<RouteEntity> findAllRoutes() {

@@ -19,10 +19,6 @@ public class TruckRouteDBService {
         this.repository = repository;
     }
 
-    public TruckRouteEntity saveTruckRoute(TruckRouteEntity truckRoute) {
-        return repository.saveAndFlush(truckRoute);
-    }
-
     public List<TruckRouteEntity> findAllTruckRoutes() {
         return repository.findAll();
     }

@@ -1,15 +1,18 @@
 package com.commutetrip.backend.services;
 
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import lombok.RequiredArgsConstructor;
+
 import com.commutetrip.backend.database.entities.RouteEntity;
 import com.commutetrip.backend.database.services.RouteDBService;
+
 import com.commutetrip.backend.models.Route;
 import com.commutetrip.backend.models.TruckStop;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
