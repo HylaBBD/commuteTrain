@@ -3,10 +3,10 @@
     --filled-color: #fff;
     --empty-bg: #fff;
     --light-bg: #fff;
-    --highlight-color: #d0d0ff;
+    --highlight-color: var(--orange);
 
     --white: #fff;
-    --orange: #ff471e;
+    --orange: #034013;
     --black: #000;
     --transparent-color: rgba(255, 255, 255, 0);
 
