@@ -270,7 +270,7 @@ nav {
     position: fixed;
     z-index: 999;
     top: 0;
-    background-color: #aaa;
+    background-color: var(--fourth-color);
     height: 4rem;
     width: 100%;
     display: flex;
