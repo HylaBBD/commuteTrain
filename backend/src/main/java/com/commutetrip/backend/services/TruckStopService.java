@@ -1,14 +1,16 @@
 package com.commutetrip.backend.services;
 
-import com.commutetrip.backend.database.entities.TruckStopEntity;
-import com.commutetrip.backend.models.TruckStop;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import com.commutetrip.backend.database.services.TruckStopDBService;
 
 import java.util.List;
 import java.util.Optional;
+
+import lombok.RequiredArgsConstructor;
+
+import com.commutetrip.backend.database.services.TruckStopDBService;
+import com.commutetrip.backend.database.entities.TruckStopEntity;
+
+import com.commutetrip.backend.models.TruckStop;
 
 @RequiredArgsConstructor
 @Service
@@ -19,11 +21,9 @@ public class TruckStopService {
         return new TruckStop(
                 truckStop.getStopId(),
                 truckStop.getStopLatitude(),
-                truckStop.getStopLongitude()
+                truckStop.getStopLongitude(),
+                truckStop.getAddress()
         );
-    }
-    public TruckStopEntity saveTruckStop(TruckStopEntity truckStop) {
-        return service.saveTruckStop(truckStop);
     }
 
     public List<TruckStopEntity> findAllTruckStops() {
