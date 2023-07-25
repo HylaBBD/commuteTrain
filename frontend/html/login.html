@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Ride Booking - Login</title>
+  <link rel="stylesheet" href="../css/styles.css" type="text/css">
+</head>
+<body class="v-container-vh">
+    <nav>
+        <ul>
+        <li>
+            <a class="nav back" href="#">
+            </a>
+        </li>
+        <li>
+            <a class="nav" href="#">
+            <img src="../images/logo-black.png" alt="profile image" width="20px" height="20px" />
+            </a>
+        </li>
+        <li>
+            <a class="nav finish" href="#">
+            </a>
+        </li>
+        </ul>
+    </nav>
+
+    <header class="v-container-vh">
+
+        <img src="../images/logo-black.png" alt="logo" class="logo" />
+
+        <h2>Commute Trains</h2>
+    </header>
+
+    <section class="page login v-container">
+        <h1>Login</h1>
+        <form action="/login" method="POST">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required>
+          <br>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+          <br>
+          <button type="submit">Login</button>
+        </form>
+        <p class="redirect-message">Don't have an account? <a href="/signup">Sign up</a></p>
+    </section>
+</body>
+</html>

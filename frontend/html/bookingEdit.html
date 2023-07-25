@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Ride Booking - Edit Booking</title>
+<link rel="stylesheet" href="../css/styles.css" type="text/css">
+</head>
+<body class="v-container">
+    <nav>
+        <ul>
+        <li>
+            <a class="nav back" href="#">
+            <img src="../images/left-chevron.png" alt="back button" width="20px" height="20px" class="fas fa-chevron-left btn-icon" />
+            </a>
+        </li>
+        <li>
+            <a class="nav" href="#">
+            <img src="../images/user.png" alt="profile image" width="20px" height="20px" />
+            </a>
+        </li>
+        <li>
+            <a class="nav finish" href="#">
+            <img src="../images/menu.png" alt="menu image" width="20px" height="20" />
+            </a>
+        </li>
+        </ul>
+    </nav>
+
+    <header class="v-container-vh">
+
+        <img src="../images/logo-black.png" alt="logo" class="logo" />
+
+        <h2>Commute Trains</h2>
+    </header>
+
+    <section class="page edit-booking" >
+
+        <h1>Change of plans?</h1>
+
+        <form action="/update-booking" method="POST">
+            <label for="bookingID">Booking ID:</label>
+                <input type="text" id="bookingID" name="bookingID" value="12345" readonly>
+
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" value="2023-07-30" required>
+
+                <label for="timeslot">Timeslot:</label>
+                <input type="text" id="timeslot" name="timeslot" value="10:00 AM - 12:00 PM" required>
+
+                <label for="busID">Bus ID:</label>
+                <input type="text" id="busID" name="busID" value="1234" required>
+
+                <label for="tierLevel">Tier Level:</label>
+                <select id="tierLevel" name="tierLevel" required>
+                    <option value="Economy">Economy</option>
+                    <option value="Business" selected>Business</option>
+                    <option value="First Class">First Class</option>
+                </select>
+
+                <label for="route">Route:</label>
+                <input type="text" id="route" name="route" value="City Center to Suburb" required>
+
+                <button type="submit" class="input-button">Update Booking</button>
+            </form>
+        </section>
+    </body>
+</html>
