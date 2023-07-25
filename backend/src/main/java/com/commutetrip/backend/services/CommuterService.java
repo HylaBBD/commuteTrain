@@ -34,18 +34,6 @@ public class CommuterService {
         return Optional.empty();
     }
 
-    public Commuter saveCommuter(Commuter commuter) {
-        // Call aws to save commuter and get aws_sub_id
-        CommuterEntity savedCommuter = service.saveCommuter(new CommuterEntity(
-                commuter.commuterName(),
-                0L
-        ));
-        return new Commuter(
-                savedCommuter.getCommuterId(),
-                savedCommuter.getCommuterName()
-        );
-    }
-
     public List<Commuter> findAllCommuters() {
         return service.findAllCommuters()
                 .stream().map(this::mapCommuter)
@@ -67,5 +55,25 @@ public class CommuterService {
     public Optional<Commuter> getCommuter(Long commuterId){
         return findByCommuterId(commuterId)
                 .map(this::mapCommuter);
+    }
+
+    public Commuter commuterSignUp(Commuter commuter) {
+        // Call aws to save commuter and get aws_sub_id
+        Long awsUserId = 0L;
+        CommuterEntity savedCommuter = service.saveCommuter(new CommuterEntity(
+                commuter.commuterName(),
+                awsUserId
+        ));
+        return new Commuter(
+                savedCommuter.getCommuterId(),
+                savedCommuter.getCommuterName()
+        );
+    }
+
+    public Optional<Commuter> signIn(Commuter commuter) {
+        /*
+            Add functionality for the commuter to sign in
+         */
+        return Optional.of(commuter);
     }
 }

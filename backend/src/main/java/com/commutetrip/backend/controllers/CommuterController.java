@@ -1,5 +1,6 @@
 package com.commutetrip.backend.controllers;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -51,14 +52,39 @@ public class CommuterController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @Operation(summary = "Create new Commuter", description = "Create a Commuter")
+    @Operation(summary = "Commuter Sign Up", description = "Sign Up and create a Commuter")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Successfully Created"),
     })
-    @PostMapping("")
-    public ResponseEntity<Commuter> saveCommuter(
+    @PostMapping("/sign-up")
+    public ResponseEntity<Commuter> commuterSignUp(
             @RequestBody Commuter commuter
     ) {
-        return new ResponseEntity<>(commuterService.saveCommuter(commuter), HttpStatus.CREATED);
+        return new ResponseEntity<>(commuterService.commuterSignUp(commuter), HttpStatus.CREATED);
+    }
+
+    @Operation(summary = "Commuter Sign In", description = "Sign In for a Commuter")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully SignIn"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+    })
+    @PostMapping("/sign-ip")
+    public ResponseEntity<Commuter> commuterSignIn(
+            @RequestBody Commuter commuter
+    ) {
+        return commuterService.signIn(commuter)
+                .map(value -> {
+                    /*
+                        We need to get the access token and send that back for the requests like making a booking.
+                        We also need to get the token again on the other endpoints and validate that.
+                            -> chat to team about the token validation.
+                            -> would we need to call cognito on each request? to check the token:
+                                note: I believe that we might need to, and check the refresh token as well.
+                     */
+                    HttpHeaders headers = new HttpHeaders();
+                    headers.add("AccessToken", "blah-blah-blah");
+                    return new ResponseEntity<>(value, headers, HttpStatus.OK);
+                })
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 }
