@@ -38,7 +38,7 @@ public class CommuterService {
         // Call aws to save commuter and get aws_sub_id
         CommuterEntity savedCommuter = service.saveCommuter(new CommuterEntity(
                 commuter.commuterName(),
-                0L
+                "ID"
         ));
         return new Commuter(
                 savedCommuter.getCommuterId(),
@@ -52,7 +52,7 @@ public class CommuterService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<CommuterEntity> findByAwsUserId(Long awsUserId) {
+    public Optional<CommuterEntity> findByAwsUserId(String awsUserId) {
         return service.findByAwsUserId(awsUserId);
     }
 
