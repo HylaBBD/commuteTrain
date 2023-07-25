@@ -38,7 +38,7 @@ public class UserController {
         return "";
     }
 
-    @GetMapping("/name")
+    @GetMapping("/sub")
     @ResponseBody
     public String currentAwsID() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
