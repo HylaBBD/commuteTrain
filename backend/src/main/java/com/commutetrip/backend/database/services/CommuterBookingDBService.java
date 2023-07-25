@@ -1,10 +1,10 @@
 package com.commutetrip.backend.database.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.commutetrip.backend.database.repositories.CommuterBookingRepository;
 import com.commutetrip.backend.database.entities.CommuterBookingEntity;
@@ -36,5 +36,9 @@ public class CommuterBookingDBService {
 
     public List<CommuterBookingEntity> findAllByCommuterIdAndTruckRouteId(Long commuterId, Long truckRouteId) {
         return repository.findAllByCommuterIdAndTruckRouteId(commuterId, truckRouteId);
+    }
+
+    public List<CommuterBookingEntity> findAllBookings() {
+        return repository.findAll();
     }
 }

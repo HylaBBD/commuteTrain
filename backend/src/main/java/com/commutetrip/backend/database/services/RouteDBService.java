@@ -1,4 +1,5 @@
 package com.commutetrip.backend.database.services;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,6 @@ public class RouteDBService {
         this.repository = repository;
     }
 
-    public RouteEntity saveRoute(RouteEntity route) {
-        return repository.saveAndFlush(route);
-    }
-
     public List<RouteEntity> findAllRoutes() {
         return repository.findAll();
     }
@@ -37,7 +34,7 @@ public class RouteDBService {
         return repository.findAllByEndPoint(endPoint);
     }
 
-    public Optional<RouteEntity> findByStartingPointAndEndPoint(Long startingPoint, Long endPoint) {
-        return repository.findByStartingPointAndEndPoint(startingPoint, endPoint);
+    public List<RouteEntity> findAllByStartingPointAndEndPoint(Long startingPoint, Long endPoint) {
+        return repository.findAllByStartingPointAndEndPoint(startingPoint, endPoint);
     }
 }

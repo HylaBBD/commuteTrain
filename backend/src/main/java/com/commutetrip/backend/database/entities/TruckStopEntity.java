@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,5 +27,8 @@ public class TruckStopEntity {
 
   @Column(name = "stop_longitude")
   private Double stopLongitude;
+
+  @Column(name = "address")
+  private String address;
 
 }

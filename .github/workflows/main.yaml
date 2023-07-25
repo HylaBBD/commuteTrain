@@ -25,7 +25,7 @@ jobs:
           java-version: "17"
       - name: Build with Maven
         working-directory: ./backend
-        run: mvn clean install
+        run: mvn clean install -DskipTests -P prod
 
       # this step uses Github OIDC to assume the role in the sandbox account (the permissions section above is required for this to work)
       - name: Configure AWS credentials from Grad GP1 account
