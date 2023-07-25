@@ -9,7 +9,7 @@ import com.commutetrip.backend.database.entities.CommuterEntity;
 
 @Repository
 public interface CommuterRepository extends JpaRepository<CommuterEntity, Long> {
-    Optional<CommuterEntity> findByAwsUserId(Long awsUserId);
+    Optional<CommuterEntity> findByAwsUserId(String awsUserId);
     Optional<CommuterEntity> findByCommuterName(String commuterName);
     Optional<CommuterEntity> findByCommuterId(Long commuterId);
 

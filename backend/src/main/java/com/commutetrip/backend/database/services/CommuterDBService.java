@@ -26,7 +26,7 @@ public class CommuterDBService {
         return repository.findAll();
     }
 
-    public Optional<CommuterEntity> findByAwsUserId(Long awsUserId) {
+    public Optional<CommuterEntity> findByAwsUserId(String awsUserId) {
         return repository.findByAwsUserId(awsUserId);
     }
 

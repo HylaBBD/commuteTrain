@@ -26,9 +26,9 @@ public class CommuterEntity {
   private String commuterName;
 
   @Column(name = "aws_user_id")
-  private Long awsUserId;
+  private String awsUserId;
 
-  public CommuterEntity(String commuterName, Long awsUserId) {
+  public CommuterEntity(String commuterName, String awsUserId) {
     this.commuterName = commuterName;
     this.awsUserId = awsUserId;
   }
