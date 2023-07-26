@@ -2,6 +2,9 @@ package com.commutetrip.backend.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,11 +57,21 @@ public class BookingController {
 
         @Operation(summary = "Create new Booking", description = "Create a Commuter Booking")
         @ApiResponses(value = {
-                        @ApiResponse(responseCode = "201", description = "Successfully Created"),
+                @ApiResponse(responseCode = "201", description = "Successfully Created"),
+                @ApiResponse(responseCode = "400", description = "Bad Request"),
         })
         @PostMapping("")
         public ResponseEntity<CommuterBooking> saveBooking(
                         @RequestBody CommuterBookingEntity booking) {
-                return new ResponseEntity<>(commuterBookingService.saveBooking(booking), HttpStatus.CREATED);
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                String sub = "";
+                if (authentication.getPrincipal() instanceof OidcUser) {
+                        OidcUser principal = ((OidcUser) authentication.getPrincipal());
+
+                        sub =  principal.getClaim("sub");
+                }
+                return commuterBookingService.saveBooking(booking, sub)
+                        .map(value -> new ResponseEntity<>(value, HttpStatus.CREATED))
+                        .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
         }
 }

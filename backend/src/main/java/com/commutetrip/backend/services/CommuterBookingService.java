@@ -1,5 +1,6 @@
 package com.commutetrip.backend.services;
 
+import com.commutetrip.backend.database.entities.CommuterEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,10 +33,13 @@ public class CommuterBookingService {
         );
     }
 
-    public CommuterBooking saveBooking(CommuterBookingEntity booking) {
-        return mapBooking(commuterBookingDBService.saveBooking(booking));
+    public Optional<CommuterBooking> saveBooking(CommuterBookingEntity booking, String sub) {
+        Optional<CommuterEntity> commuterEntity = commuterService.findByAwsUserId(sub);
+        return commuterEntity.map(value -> {
+            booking.setCommuterId(value.getCommuterId());
+            return mapBooking(commuterBookingDBService.saveBooking(booking));
+        });
     }
-
 
     private List<CommuterBooking> findAllByCommuterId(Long commuterId) {
         return commuterBookingDBService.findAllByCommuterId(commuterId)
