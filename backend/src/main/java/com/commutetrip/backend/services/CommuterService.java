@@ -18,12 +18,12 @@ import com.commutetrip.backend.models.Commuter;
 public class CommuterService {
     private final CommuterDBService service;
 
-    private Commuter mapCommuter(CommuterEntity commuter){
+    private Commuter mapCommuter(CommuterEntity commuter) {
         return new Commuter(
                 commuter.getCommuterId(),
-                commuter.getCommuterName()
-        );
+                commuter.getCommuterName());
     }
+
     public Optional<Commuter> findCommuter(String name, Long id) {
         if (id != null) {
             return getCommuter(id);
@@ -34,16 +34,14 @@ public class CommuterService {
         return Optional.empty();
     }
 
-    public Commuter saveCommuter(Commuter commuter) {
+    public Commuter saveCommuter(String name, String id) {
         // Call aws to save commuter and get aws_sub_id
         CommuterEntity savedCommuter = service.saveCommuter(new CommuterEntity(
-                commuter.commuterName(),
-                "ID"
-        ));
+                name,
+                id));
         return new Commuter(
                 savedCommuter.getCommuterId(),
-                savedCommuter.getCommuterName()
-        );
+                savedCommuter.getCommuterName());
     }
 
     public List<Commuter> findAllCommuters() {
@@ -64,7 +62,7 @@ public class CommuterService {
         return service.findByCommuterId(commuterId);
     }
 
-    public Optional<Commuter> getCommuter(Long commuterId){
+    public Optional<Commuter> getCommuter(Long commuterId) {
         return findByCommuterId(commuterId)
                 .map(this::mapCommuter);
     }
