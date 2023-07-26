@@ -68,7 +68,7 @@ public class BookingController {
                 if (authentication.getPrincipal() instanceof OidcUser) {
                         OidcUser principal = ((OidcUser) authentication.getPrincipal());
 
-                        sub =  principal.getClaim("sub");
+                        sub =  principal.getClaim("sub").toString();
                 }
                 return commuterBookingService.saveBooking(booking, sub)
                         .map(value -> new ResponseEntity<>(value, HttpStatus.CREATED))
