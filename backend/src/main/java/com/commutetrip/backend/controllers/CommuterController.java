@@ -49,13 +49,4 @@ public class CommuterController {
                                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
         }
 
-        @Operation(summary = "Create new Commuter", description = "Create a Commuter")
-        @ApiResponses(value = {
-                        @ApiResponse(responseCode = "201", description = "Successfully Created"),
-        })
-        @PostMapping("")
-        public ResponseEntity<Commuter> saveCommuter(
-                        @RequestBody Commuter commuter) {
-                return new ResponseEntity<>(commuterService.saveCommuter(commuter), HttpStatus.CREATED);
-        }
 }
