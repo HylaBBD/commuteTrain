@@ -79,6 +79,7 @@
 .v-container {
     display: flex;
     flex-direction: column;
+    height: 60vh;
 }
 
 .v-container-v {
@@ -224,7 +225,8 @@ select {
 }
 
 select>* {
-    font-size: clamp(10px, 20px, 10px);;
+    font-size: clamp(10px, 20px, 10px);
+    ;
 }
 
 label {
@@ -387,4 +389,24 @@ p.redirect-message {
 
 #map {
     height: 50%;
+}
+
+table {
+    margin: 0 6rem 0 6rem;
+}
+
+tbody {
+    display: block;
+    overflow-y: scroll;
+    height: 15vh;
+
+}
+
+table th {
+    text-align: left;
+}
+
+table tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }

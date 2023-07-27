@@ -1,5 +1,64 @@
+let equipment = ["barbell", "dumbbell", "kettlebell", "medicine ball", "resistance band", "jump rope", "foam roller", "yoga mat"];
+let exercises = ["Squat", "Bench Press", "Deadlift", "Overhead Press", "Barbell Row"];
+
+const addWorkouts = (parent) => {
+    fetch('http://localhost:8081/api/commute-train/bookings')
+        .then(response => response.json())
+        .then(data => {
+            let h2 = document.createElement('h2');
+            h2.innerText = data.exerciseType;
+
+            let br = document.createElement('br');
+            let table = document.createElement('table');
+            let tableHeader = document.createElement('tr');
+
+            let tableHeaderExercise = document.createElement('th');
+            tableHeaderExercise.innerText = 'Exercise';
+
+            let tableHeaderEquipment = document.createElement('th');
+            tableHeaderEquipment.innerText = 'Equipment';
+
+            tableHeader.appendChild(tableHeaderExercise);
+            tableHeader.appendChild(tableHeaderEquipment);
+
+            let tableBody = document.createElement('tbody');
+
+            let maxLength = Math.max(exercises.length, equipment.length);
+
+            for (let i = 0; i < maxLength; i++) {
+                let tableRow = document.createElement('tr');
+                let tableDataExercise = document.createElement('td')
+                let tableDataEquipment = document.createElement('td')
+
+                if (exercises[i] !== undefined) {
+                    tableDataExercise.innerText = data.exercises[i].name;
+                } else {
+                    tableDataExercise.innerText = '';
+                }
+
+                if (equipment[i] !== undefined) {
+                    tableDataEquipment.innerText = data.equipment[i].name;
+                } else {
+                    tableDataEquipment.innerText = '';
+                }
+
+                tableRow.appendChild(tableDataExercise);
+                tableRow.appendChild(tableDataEquipment);
+                tableBody.appendChild(tableRow);
+            }
+
+            table.appendChild(tableHeader);
+            table.appendChild(tableBody);
+
+            parent.appendChild(br);
+            parent.appendChild(h2);
+            parent.appendChild(table);
+        })
+}
+
+
 const addBookings = () => {
-    fetch('https://commute-train.bbdgrad.com/api/commute-train/bookings')
+    fetch('http://localhost:8081/api/commute-train/bookings')
         .then(response => response.json())
         .then(data => data.forEach(booking => {
             let articleElement = document.createElement('article');
@@ -53,6 +112,8 @@ const addBookings = () => {
             cardContent.appendChild(timeEndData);
 
             articleElement.appendChild(cardContent)
+
+            addWorkouts(articleElement);
 
             document.getElementById('bookings-list').appendChild(articleElement);
         }))
