@@ -29,8 +29,7 @@ public class CommuterBookingService {
         return new CommuterBooking(
                 booking.getBookingId(),
                 commuter.orElseThrow(),
-                truckRoute.orElseThrow()
-        );
+                truckRoute.orElseThrow());
     }
 
     public Optional<CommuterBooking> saveBooking(CommuterBookingEntity booking, String sub) {
@@ -66,7 +65,7 @@ public class CommuterBookingService {
     }
 
     public List<CommuterBooking> findBookings(Long commuterId, Long truckRouteId) {
-        if(commuterId != null && truckRouteId != null) {
+        if (commuterId != null && truckRouteId != null) {
             return findAllByCommuterIdAndTruckRouteId(commuterId, truckRouteId);
         } else if (commuterId != null) {
             return findAllByCommuterId(commuterId);
