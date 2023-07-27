@@ -1,8 +1,8 @@
 package com.commutetrip.backend.services;
 
+import com.commutetrip.backend.models.TruckRoute;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
@@ -10,37 +10,25 @@ import lombok.RequiredArgsConstructor;
 import com.commutetrip.backend.database.services.TrainingTruckDBService;
 import com.commutetrip.backend.database.entities.TrainingTruckEntity;
 
-import com.commutetrip.backend.models.Route;
 import com.commutetrip.backend.models.TrainingTruck;
 
 @RequiredArgsConstructor
 @Service
 public class TrainingTruckService {
     private final TrainingTruckDBService trainingTruckDBService;
-    private final RouteService routeService;
+    private final TruckRouteService truckRouteService;
 
     private TrainingTruck mapTrainingTruck(TrainingTruckEntity trainingTruck) {
-        Optional<Route> route = routeService.getRouteById(trainingTruck.getRouteId());
+        Optional<TruckRoute> truckRoute = truckRouteService.getTruckRouteById(trainingTruck.getTruckRouteId());
         return new TrainingTruck(
                 trainingTruck.getTruckId(),
-                route.orElseThrow()
+                truckRoute.orElseThrow(),
+                trainingTruck.getType()
         );
     }
 
-    public List<TrainingTruckEntity> findAllTrainingTrucks() {
-        return trainingTruckDBService.findAllTrainingTrucks();
-    }
-
-    public Optional<TrainingTruckEntity> findByTruckId(Long truckId) {
-        return trainingTruckDBService.findByTruckId(truckId);
-    }
-
-    public List<TrainingTruckEntity> findAllByRouteId(Long routeId) {
-        return trainingTruckDBService.findAllByRouteId(routeId);
-    }
-
-    public Optional<TrainingTruck> getTrainingTruck(Long truckId) {
-        return findByTruckId(truckId)
+    public Optional<TrainingTruck> getTrainingTruckByTruckRouteId(Long truckRouteId) {
+        return trainingTruckDBService.findByTruckRouteId(truckRouteId)
                 .map(this::mapTrainingTruck);
     }
 }

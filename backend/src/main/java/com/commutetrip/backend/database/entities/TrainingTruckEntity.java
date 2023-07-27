@@ -22,11 +22,10 @@ public class TrainingTruckEntity {
   @Column(name = "truck_id")
   private Long truckId;
 
-  @Column(name = "route_id")
-  private Long routeId;
+  @Column(name = "truck_route_id")
+  private Long truckRouteId;
 
-  public TrainingTruckEntity(Long routeId) {
-    this.routeId = routeId;
-  }
+  @Column(name = "type")
+  private String type;
 
 }
