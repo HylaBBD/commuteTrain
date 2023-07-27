@@ -45,9 +45,15 @@ async function initMap() {
 }
 
 const submit = () => {
-    fetch(SERVER_URL + 'api/commute-train/bookings?truckRouteId=' + document.getElementById('route').valueOf(), {
+    let e = document.getElementById("elementId");
+    let value = e.options[e.selectedIndex].value;
+
+    fetch(SERVER_URL + 'api/commute-train/bookings?truckRouteId=' + value, {
         method: 'POST'
-    }).then(window.location.push('/index.html'))
+    }).then(response => response.json())
+        .then(data => {
+            window.location.push('/index.html')
+        })
 }
 
 getRoutes();
