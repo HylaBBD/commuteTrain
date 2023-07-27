@@ -3,6 +3,7 @@ package com.commutetrip.backend.services;
 import com.commutetrip.backend.database.entities.CommuterEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -65,16 +66,20 @@ public class CommuterBookingService {
                 .collect(Collectors.toList());
     }
 
-    public List<CommuterBooking> findBookings(Long commuterId, Long truckRouteId) {
-        if(commuterId != null && truckRouteId != null) {
-            return findAllByCommuterIdAndTruckRouteId(commuterId, truckRouteId);
-        } else if (commuterId != null) {
-            return findAllByCommuterId(commuterId);
-        } else if (truckRouteId != null) {
-            return findAllByTruckRouteId(truckRouteId);
-        } else {
-            return findAllBookings();
-        }
+    public List<CommuterBooking> findBookings(String sub, Long truckRouteId) {
+        Optional<CommuterEntity> commuter = commuterService.findByAwsUserId(sub);
+        return commuter.map(value -> {
+            Long commuterId = value.getCommuterId();
+            if(commuterId != null && truckRouteId != null) {
+                return findAllByCommuterIdAndTruckRouteId(commuterId, truckRouteId);
+            } else if (commuterId != null) {
+                return findAllByCommuterId(commuterId);
+            } else if (truckRouteId != null) {
+                return findAllByTruckRouteId(truckRouteId);
+            } else {
+                return findAllBookings();
+            }
+        }).orElseGet(ArrayList::new);
     }
 
     public Optional<CommuterBooking> getBooking(Long bookingId) {

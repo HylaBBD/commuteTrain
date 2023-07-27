@@ -30,15 +30,20 @@ import com.commutetrip.backend.models.CommuterBooking;
 public class BookingController {
         private final CommuterBookingService commuterBookingService;
 
-        @Operation(summary = "Get all Commuter Bookings", description = "Get an array of Commuter Bookings by either commuter id or truck route id")
+        @Operation(summary = "Get all Commuter Bookings", description = "Get an array of Commuter Bookings by the logged in Commuter and or the truck route id")
         @ApiResponses(value = {
                         @ApiResponse(responseCode = "200", description = "Successfully retrieved"),
         })
         @GetMapping("")
         public ResponseEntity<List<CommuterBooking>> getBookings(
-                        @RequestParam(value = "commuterId", required = false) @Parameter(name = "commuterId", description = "Id of Commuter", example = "1") Long commuterId,
                         @RequestParam(value = "truckRouteId", required = false) @Parameter(name = "truckRouteId", description = "Id of Truck Route", example = "1") Long truckRouteId) {
-                return new ResponseEntity<>(commuterBookingService.findBookings(commuterId, truckRouteId),
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                String sub = "";
+                if (authentication.getPrincipal() instanceof OidcUser) {
+                        OidcUser principal = ((OidcUser) authentication.getPrincipal());
+                        sub =  principal.getClaim("sub").toString();
+                }
+                return new ResponseEntity<>(commuterBookingService.findBookings(sub, truckRouteId),
                                 HttpStatus.OK);
         }
 
@@ -66,7 +71,6 @@ public class BookingController {
                 String sub = "";
                 if (authentication.getPrincipal() instanceof OidcUser) {
                         OidcUser principal = ((OidcUser) authentication.getPrincipal());
-
                         sub =  principal.getClaim("sub").toString();
                 }
                 CommuterBookingEntity commuterBooking = new CommuterBookingEntity();
