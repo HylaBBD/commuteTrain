@@ -1,5 +1,5 @@
 const addBookings = () => {
-    fetch('http://localhost:8081/api/commute-train/bookings')
+    fetch('https://commute-train.bbdgrad.com/api/commute-train/bookings')
         .then(response => response.json())
         .then(data => data.forEach(booking => {
             let item = document.createElement('li');
