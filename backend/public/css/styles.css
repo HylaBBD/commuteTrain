@@ -272,6 +272,7 @@ button {
 nav {
     position: fixed;
     z-index: 999;
+    right: 0;
     top: 0;
     background-color: var(--fourth-color);
     height: 4rem;
@@ -309,6 +310,7 @@ nav a:hover {
 }
 
 section {
+    place-self: center;
     width: var(--container-width);
     max-width: var(--max-container-width);
     min-width: var(--min-container-width);
