@@ -1,12 +1,18 @@
-let equipment = ["barbell", "dumbbell", "kettlebell", "medicine ball", "resistance band", "jump rope", "foam roller", "yoga mat"];
-let exercises = ["Squat", "Bench Press", "Deadlift", "Overhead Press", "Barbell Row"];
-
-const addWorkouts = (parent) => {
-    fetch('http://localhost:8081/api/commute-train/bookings')
+const addWorkouts = (parent, bookingID) => {
+    let loader = document.createElement('div');
+    loader.classList.add('loader');
+    parent.appendChild(loader);
+    fetch(`http://localhost:8081/api/commute-train/workouts/${bookingID}`)
         .then(response => response.json())
         .then(data => {
+            loader.classList.add('hidden');
+
+            if (data['exerciseType'] === undefined) {
+                return;
+            }
+
             let h2 = document.createElement('h2');
-            h2.innerText = data.exerciseType;
+            h2.innerText = data['exerciseType'];
 
             let br = document.createElement('br');
             let table = document.createElement('table');
@@ -23,21 +29,21 @@ const addWorkouts = (parent) => {
 
             let tableBody = document.createElement('tbody');
 
-            let maxLength = Math.max(exercises.length, equipment.length);
+            let maxLength = Math.max(data['exercises'].length, data['equipment'].length);
 
             for (let i = 0; i < maxLength; i++) {
                 let tableRow = document.createElement('tr');
                 let tableDataExercise = document.createElement('td')
                 let tableDataEquipment = document.createElement('td')
 
-                if (exercises[i] !== undefined) {
-                    tableDataExercise.innerText = data.exercises[i].name;
+                if (data['exercises'][i] !== undefined) {
+                    tableDataExercise.innerText = data['exercises'][i]['name'];
                 } else {
                     tableDataExercise.innerText = '';
                 }
 
-                if (equipment[i] !== undefined) {
-                    tableDataEquipment.innerText = data.equipment[i].name;
+                if (data['equipment'][i] !== undefined) {
+                    tableDataEquipment.innerText = data['equipment'][i]['name'];
                 } else {
                     tableDataEquipment.innerText = '';
                 }
@@ -113,7 +119,7 @@ const addBookings = () => {
 
             articleElement.appendChild(cardContent)
 
-            addWorkouts(articleElement);
+            addWorkouts(articleElement, booking['bookingId']);
 
             document.getElementById('bookings-list').appendChild(articleElement);
         }))
