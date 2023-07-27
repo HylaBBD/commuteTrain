@@ -50,7 +50,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    font-size: 1.5vh;
+    font-size: clamp(1vw, 2vh, 3vw);
 }
 
 .container {
@@ -156,6 +156,7 @@ body {
     align-content: center;
     justify-content: center;
     overflow-x: hidden;
+    place-content: flex-start;
 }
 
 main {
@@ -168,7 +169,7 @@ main {
 }
 
 header {
-    margin-top: 7vh;
+    margin-top: 10vh;
 }
 
 header h1 {
@@ -220,6 +221,10 @@ select {
     background-color: var(--secondary-color);
     border: 0.1rem solid var(--shadow-color);
     border-radius: 0.75rem;
+}
+
+select>* {
+    font-size: clamp(10px, 20px, 10px);;
 }
 
 label {
@@ -327,7 +332,6 @@ article.booking-card {
 }
 
 article.booking-card h2 {
-    display: flex;
     color: var(--secondary-text-color);
     width: 100%;
     flex-direction: column;

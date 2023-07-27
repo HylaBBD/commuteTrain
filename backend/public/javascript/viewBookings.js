@@ -2,33 +2,59 @@ const addBookings = () => {
     fetch('https://commute-train.bbdgrad.com/api/commute-train/bookings')
         .then(response => response.json())
         .then(data => data.forEach(booking => {
-            let item = document.createElement('li');
-            let from = document.createElement('address');
-            let to = document.createElement('address');
-            let at = document.createElement('time');
-            let until = document.createElement('time');
+            let articleElement = document.createElement('article');
+            articleElement.classList.add('booking-card', 'v-container');
 
-            from.innerText = ' Pickup: ' + booking['truckRoute']['route']['startingPoint']['address'];
-            to.innerText = ' Drop-off: ' + booking['truckRoute']['route']['endPoint']['address'];
-            at.innerText = ' Pickup Time: ' + booking['truckRoute']['pickupTime'].replace('T', ' ').replace(RegExp('\:\\d{2}\\..*'), '');
-            until.innerText = ' Drop-off Time: ' + booking['truckRoute']['dropOffTime'].replace('T', ' ').replace(RegExp('\:\\d{2}\\..*'), '');
-            console.log(from, to, at, until);
-            let fromHeader = document.createElement('h4');
-            let toHeader = document.createElement('h4');
-            let untilHeader = document.createElement('h4');
-            let atHeader = document.createElement('h4');
-            let finalHeader = document.createElement('h4');
-            fromHeader.appendChild(from);
-            toHeader.appendChild(to);
-            untilHeader.appendChild(until);
-            atHeader.appendChild(at);
-            finalHeader.innerText = '-'
-            item.appendChild(fromHeader);
-            item.appendChild(toHeader);
-            item.appendChild(atHeader);
-            item.appendChild(untilHeader);
-            item.appendChild(finalHeader);
-            document.getElementById('bookingsList').appendChild(item);
+            let addressRouteStartValue = document.createElement('address');
+            let addressRouteEndValue = document.createElement('address');
+            let timeStartValue = document.createElement('time');
+            let timeEndValue = document.createElement('time');
+
+            addressRouteStartValue.innerText = booking['truckRoute']['route']['startingPoint']['address'];
+            addressRouteEndValue.innerText = booking['truckRoute']['route']['endPoint']['address'];
+            timeStartValue.innerText = booking['truckRoute']['pickupTime'].replace('T', ' ').replace(RegExp('\:\\d{2}\\..*'), '');
+            timeEndValue.innerText = booking['truckRoute']['dropOffTime'].replace('T', ' ').replace(RegExp('\:\\d{2}\\..*'), '');
+            console.log(addressRouteStartValue, addressRouteEndValue, timeStartValue, timeEndValue);
+
+            let cardHeader = document.createElement('h2');
+            cardHeader.innerText = 'Booking for ' + booking['commuter']['commuterName'] + '.';
+
+            articleElement.appendChild(cardHeader);
+
+            let cardContent = document.createElement('dl');
+
+            let addressRouteStartLabel = document.createElement('dt')
+            addressRouteStartLabel.innerText = 'Pick up area:';
+            let addressRouteEndLabel = document.createElement('dt')
+            addressRouteEndLabel.innerText = 'Drop-off area:';
+            let timeStartLabel = document.createElement('dt')
+            timeStartLabel.innerText = 'Pick up time:';
+            let timeEndLabel = document.createElement('dt')
+            timeEndLabel.innerText = 'Drop-off time:';
+
+            let addressRouteStartData = document.createElement('dd');
+            let addressRouteEndData = document.createElement('dd');
+            let timeStartData = document.createElement('dd');
+            let timeEndData = document.createElement('dd');
+
+
+            addressRouteStartData.appendChild(addressRouteStartValue);
+            addressRouteEndData.appendChild(addressRouteEndValue);
+            timeEndData.appendChild(timeEndValue);
+            timeStartData.appendChild(timeStartValue);
+
+            cardContent.appendChild(addressRouteStartLabel);
+            cardContent.appendChild(addressRouteStartData);
+            cardContent.appendChild(addressRouteEndLabel);
+            cardContent.appendChild(addressRouteEndData);
+            cardContent.appendChild(timeStartLabel);
+            cardContent.appendChild(timeStartData);
+            cardContent.appendChild(timeEndLabel);
+            cardContent.appendChild(timeEndData);
+
+            articleElement.appendChild(cardContent)
+
+            document.getElementById('bookings-list').appendChild(articleElement);
         }))
 }
 
