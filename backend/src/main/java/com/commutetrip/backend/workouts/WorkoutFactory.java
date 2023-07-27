@@ -19,17 +19,17 @@ public class WorkoutFactory {
     }
 
     public TruckWorkouts createWorkout(String workoutType) {
-        return switch (workoutType.toLowerCase()) {
-            case "cardio":
+        return switch (workoutType) {
+            case "Cardio":
                 Workout cardioWorkout = new CardioWorkout(exercisesService, equipmentService);
                 yield cardioWorkout.getWorkouts();
-            case "circuit":
+            case "Circuit":
                 Workout circuitWorkout = new CircuitWorkout(exercisesService, equipmentService);
                 yield circuitWorkout.getWorkouts();
-            case "lowerbody":
+            case "LowerBody":
                 Workout lowerBodyWorkout = new LowerBodyWorkout(exercisesService, equipmentService);
                 yield lowerBodyWorkout.getWorkouts();
-            case "upperbody":
+            case "UpperBody":
                 Workout upperBodyWorkout = new UpperBodyWorkout(exercisesService, equipmentService);
                 yield upperBodyWorkout.getWorkouts();
             default:
