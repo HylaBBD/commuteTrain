@@ -62,8 +62,8 @@ public class BookingController {
 
         @Operation(summary = "Create new Booking", description = "Create a Commuter Booking")
         @ApiResponses(value = {
-                @ApiResponse(responseCode = "201", description = "Successfully Created"),
-                @ApiResponse(responseCode = "400", description = "Bad Request"),
+                        @ApiResponse(responseCode = "201", description = "Successfully Created"),
+                        @ApiResponse(responseCode = "400", description = "Bad Request"),
         })
         @PostMapping("")
         public ResponseEntity<CommuterBooking> saveBooking(@RequestParam long truckRouteId) {
@@ -71,12 +71,13 @@ public class BookingController {
                 String sub = "";
                 if (authentication.getPrincipal() instanceof OidcUser) {
                         OidcUser principal = ((OidcUser) authentication.getPrincipal());
-                        sub =  principal.getClaim("sub").toString();
+
+                        sub = principal.getClaim("sub").toString();
                 }
                 CommuterBookingEntity commuterBooking = new CommuterBookingEntity();
                 commuterBooking.setTruckRouteId(truckRouteId);
                 return commuterBookingService.saveBooking(commuterBooking, sub)
-                        .map(value -> new ResponseEntity<>(value, HttpStatus.CREATED))
-                        .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
+                                .map(value -> new ResponseEntity<>(value, HttpStatus.CREATED))
+                                .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
         }
 }

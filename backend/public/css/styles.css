@@ -79,6 +79,7 @@
 .v-container {
     display: flex;
     flex-direction: column;
+    height: 60vh;
 }
 
 .v-container-v {
@@ -224,7 +225,8 @@ select {
 }
 
 select>* {
-    font-size: clamp(10px, 20px, 10px);;
+    font-size: clamp(10px, 20px, 10px);
+    ;
 }
 
 label {
@@ -387,4 +389,50 @@ p.redirect-message {
 
 #map {
     height: 50%;
+}
+
+table {
+    margin: 0 6rem 0 6rem;
+}
+
+tbody {
+    display: block;
+    overflow-y: scroll;
+    height: 15vh;
+
+}
+
+table th {
+    text-align: left;
+}
+
+table tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.loader {
+    border: 16px solid #8be3a7;
+    border-top: 16px solid #02a636;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 2s linear infinite;
+
+    align-self: center;
+    margin-top: 50px;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

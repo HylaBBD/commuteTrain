@@ -30,8 +30,7 @@ public class CommuterBookingService {
         return new CommuterBooking(
                 booking.getBookingId(),
                 commuter.orElseThrow(),
-                truckRoute.orElseThrow()
-        );
+                truckRoute.orElseThrow());
     }
 
     public Optional<CommuterBooking> saveBooking(CommuterBookingEntity booking, String sub) {
