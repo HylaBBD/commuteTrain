@@ -19,9 +19,9 @@ public class ExercisesService {
         return new Exercises(
                 exercisesEntity.getExercisesId(),
                 exercisesEntity.getName(),
-                exercisesEntity.getCategory()
-        );
+                exercisesEntity.getCategory());
     }
+
     public List<Exercises> findAllByName(String name) {
         return exercisesDBService.findAllByName(name)
                 .stream().map(this::mapExercises)

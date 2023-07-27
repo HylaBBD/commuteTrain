@@ -1,5 +1,6 @@
 package com.commutetrip.backend.strategies;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.commutetrip.backend.models.Route;
@@ -9,20 +10,24 @@ import com.commutetrip.backend.services.TrainingTruckService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-abstract class AbstractExcercises {
+abstract class AbstractWorkout {
     private final TrainingTruckService trainingTruckService;
-    private String excerciseType;
+    private String exerciseType;
 
     public Optional<Route> getRoute(Long truckId) {
         Optional<TrainingTruck> trainingTruck = trainingTruckService.getTrainingTruck(truckId);
         return trainingTruck.map(TrainingTruck::route);
     }
 
-    public void setExcerciseType(String excerciseType) {
-        this.excerciseType = excerciseType;
+    public void setExerciseType(String exerciseType) {
+        this.exerciseType = exerciseType;
     }
 
-    abstract public String getExcercises();
+    public String getExerciseType() {
+        return exerciseType;
+    }
 
-    abstract public String getEquipment();
+    abstract public List getExercises();
+
+    abstract public List getEquipment();
 }
