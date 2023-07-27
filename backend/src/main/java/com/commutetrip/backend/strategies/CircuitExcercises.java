@@ -11,6 +11,7 @@ public class CircuitExcercises extends AbstractExcercises {
     }
 
     public String getExcercises() {
+
         return "";
     }
 

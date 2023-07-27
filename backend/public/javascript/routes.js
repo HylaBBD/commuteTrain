@@ -1,4 +1,4 @@
-const SERVER_URL = 'https://commute-train.bbdgrad.com/';
+const SERVER_URL = 'http://localhost:8081/';
 
 let map;
 let start;
@@ -18,13 +18,13 @@ const getRoutes = () => {
                 document.getElementById('dropOffTime').innerText = truckRoute['dropOffTime'].replace('T', ' ').replace(RegExp('\:\\d{2}\\..*'), '');
                 start = { lat: truckRoute['route']['startingPoint']['stopLatitude'], lng: truckRoute['route']['startingPoint']['stopLongitude'] };
                 end = { lat: truckRoute['route']['endPoint']['stopLatitude'], lng: truckRoute['route']['startingPoint']['stopLongitude'] };
-                stops.push({position : start, name : truckRoute['route']['startingPoint']['address']})
-                stops.push({position : end, name : truckRoute['route']['endPoint']['address']})
+                stops.push({ position: start, name: truckRoute['route']['startingPoint']['address'] })
+                stops.push({ position: end, name: truckRoute['route']['endPoint']['address'] })
             })
         })
 }
 
-async function initMap () {
+async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
 
     map = new Map(document.getElementById("map"), {
