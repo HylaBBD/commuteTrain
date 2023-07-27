@@ -1,4 +1,4 @@
-import {SERVER_URL} from "./constants";
+const SERVER_URL = 'https://commute-train.bbdgrad.com/';
 
 let userId;
 
