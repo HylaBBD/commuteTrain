@@ -2,7 +2,7 @@ const addWorkouts = (parent, bookingID) => {
     let loader = document.createElement('div');
     loader.classList.add('loader');
     parent.appendChild(loader);
-    fetch(`http://localhost:8081/api/commute-train/workouts/${bookingID}`)
+    fetch(`https://commute-train.bbdgrad.com/api/commute-train/workouts/${bookingID}`)
         .then(response => response.json())
         .then(data => {
             loader.classList.add('hidden');
@@ -64,7 +64,7 @@ const addWorkouts = (parent, bookingID) => {
 
 
 const addBookings = () => {
-    fetch('http://localhost:8081/api/commute-train/bookings')
+    fetch('https://commute-train.bbdgrad.com/api/commute-train/bookings')
         .then(response => response.json())
         .then(data => data.forEach(booking => {
             let articleElement = document.createElement('article');
