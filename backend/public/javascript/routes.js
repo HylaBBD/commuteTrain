@@ -13,18 +13,22 @@ const getRoutes = () => {
                 let option = document.createElement('option');
                 option.value = truckRoute['truckRouteId'];
                 option.innerText = truckRoute['route']['startingPoint']['address'] + ' - ' + truckRoute['route']['endPoint']['address'];
-                document.getElementById('route').appendChild(option);
-                document.getElementById('pickupTime').innerText = truckRoute['pickupTime'].replace('T', ' ').replace(RegExp('\:\\d{2}\\..*'), '');
-                document.getElementById('dropOffTime').innerText = truckRoute['dropOffTime'].replace('T', ' ').replace(RegExp('\:\\d{2}\\..*'), '');
+
+                document.getElementById('routes-list').appendChild(option);
+
+                document.getElementById('pickupTime').value = truckRoute['pickupTime'].split('T')[0];
+                document.getElementById('dropOffTime').value = truckRoute['dropOffTime'].split('T')[0];
+
                 start = { lat: truckRoute['route']['startingPoint']['stopLatitude'], lng: truckRoute['route']['startingPoint']['stopLongitude'] };
                 end = { lat: truckRoute['route']['endPoint']['stopLatitude'], lng: truckRoute['route']['startingPoint']['stopLongitude'] };
-                stops.push({ position: start, name: truckRoute['route']['startingPoint']['address'] })
-                stops.push({ position: end, name: truckRoute['route']['endPoint']['address'] })
+
+                stops.push({position : start, name : truckRoute['route']['startingPoint']['address']})
+                stops.push({position : end, name : truckRoute['route']['endPoint']['address']})
             })
         })
 }
 
-async function initMap() {
+async function initMap () {
     const { Map } = await google.maps.importLibrary("maps");
 
     map = new Map(document.getElementById("map"), {
@@ -45,20 +49,31 @@ async function initMap() {
 }
 
 const submit = () => {
-    let e = document.getElementById("elementId");
-    let value = e.options[e.selectedIndex].value;
+    let submitButton = document.getElementById("routes-list");
+    let value = submitButton.options[submitButton.selectedIndex].value;
 
     fetch(SERVER_URL + 'api/commute-train/bookings?truckRouteId=' + value, {
         method: 'POST'
     }).then(response => response.json())
         .then(data => {
-            window.location.push('/index.html')
+            if (data['status'] === 'success') {
+                window.location.href = '../html/success.html';
+            }
+            if (data['bookingId']) {
+                window.location.href = '../html/success.html';
+            }
+            if (data['status'] === 500){
+                window.location.href = '../html/error.html';
+            }
         })
 }
 
-getRoutes();
-document.addEventListener('load', initMap);
-document.getElementById('submitButton').addEventListener('click', submit);
+document.addEventListener('DOMContentLoaded', () => {
+    getRoutes();
+    document.addEventListener('load', initMap);
+    document.getElementById('submitButton').addEventListener('click', submit);
+});
+
 
 
 // Create the script tag, set the appropriate attributes
