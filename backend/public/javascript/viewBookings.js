@@ -125,6 +125,4 @@ const addBookings = () => {
         }))
 }
 
-ocument.addEventListener('DOMContentLoaded', () => {
-    addBookings();
-});
+addBookings();
