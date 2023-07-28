@@ -12,17 +12,17 @@
     <nav>
         <ul>
         <li>
-            <a class="nav back" href="/index.html">
+            <a class="nav back" href="#">
             <img src="../images/left-chevron.png" alt="back button" width="20px" height="20px" class="fas fa-chevron-left btn-icon" />
             </a>
         </li>
         <li>
-            <a class="nav" href="/index.html">
+            <a class="nav" href="#">
             <img src="../images/user.png" alt="profile image" width="20px" height="20px" />
             </a>
         </li>
         <li>
-            <a class="nav finish" href="/index.html">
+            <a class="nav finish" href="#">
             <img src="../images/menu.png" alt="menu image" width="20px" height="20" />
             </a>
         </li>
@@ -41,26 +41,34 @@
         <h1>Train with us today!</h1>
 
         <form action="/" method="POST" >
-            <label for="pickupTime">Pickup Time:</label>
-            <input type="date" id="pickupTime" name="pickupTime" disabled>
-            <label for="dropOffTime">Drop-off Time:</label>
-            <input type="date" id="dropOffTime" name="dropOffTime" disabled>
+<!--            <label for="bookingID">Booking ID:</label>-->
+<!--                <input type="text" id="bookingID" name="bookingID" value="12345" readonly>-->
 
-            <label for="trainType">Training Type:</label>
-            <select id="trainType" name="trainType" required>
-                <option value="Cardio">Cardio</option>
-                <option value="Strength" selected>Strength</option>
-                <option value="Calisthenics">Calisthenics</option>
-            </select>
-            <label for="route">Route:</label>
-            <select name="route" id="routes-list">
-            </select>
+<!--                <label for="date">Date:</label>-->
+<!--                <input type="date" id="date" name="date" value="2023-07-30" required>-->
 
-            <button id="submitButton" type="button" class="input-button">Update Booking</button>
-        </form>
+                <label for="pickupTime">Pickup Time:</label>
+                <time id='pickupTime'></time>
+                <label for="dropOffTime">Drop-off Time:</label>
+                <time id='dropOffTime'></time>
 
+<!--                <label for="busID">Bus ID:</label>-->
+<!--                <input type="text" id="busID" name="busID" value="1234" required>-->
 
-    </section>
+<!--                <label for="tierLevel">Tier Level:</label>-->
+<!--                <select id="tierLevel" name="tierLevel" required>-->
+<!--                    <option value="Economy">Economy</option>-->
+<!--                    <option value="Business" selected>Business</option>-->
+<!--                    <option value="First Class">First Class</option>-->
+<!--                </select>-->
+
+                <label for="route">Route:</label>
+                <select name="route" id="route">
+                </select>
+
+                <button id="submitButton" type="submit" class="input-button">Update Booking</button>
+            </form>
+        </section>
     <div id="map"></div>
     </body>
 </html>
